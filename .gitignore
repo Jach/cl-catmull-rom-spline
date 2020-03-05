@@ -1,0 +1,6 @@
+*.fasl
+*.swp
+*.vim
+prep-quicklisp.lisp
+coverage-report/
+coverage-report.lisp

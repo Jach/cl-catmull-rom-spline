@@ -18,8 +18,8 @@
 (in-package #:cm-spline)
 
 (defclass spline ()
-  ((knots :accessor knots :initform (make-array 1 :adjustable t))
-   (coeffs :accessor coeffs :initform (make-array 1 :adjustable t))
+  ((knots :accessor knots :initform (make-array 1 :fill-pointer 0 :adjustable t))
+   (coeffs :accessor coeffs :initform (make-array 1 :fill-pointer 0 :adjustable t))
 
    (knots-count :accessor knots-count :initform 0)
    (current-knot :accessor cur-knot :initform 1)

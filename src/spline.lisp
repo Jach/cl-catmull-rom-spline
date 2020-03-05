@@ -87,6 +87,12 @@
   (vector-push-extend (vector 0.0 0.0) (coeffs spline))
   spline)
 
+(defmacro knot-i-x (spline i)
+  `(aref (aref (knots ,spline) ,i) 0))
+
+(defmacro knot-i-y (spline i)
+  `(aref (aref (knots ,spline) ,i) 1))
+
 (defmethod scale ((spline spline) (factor real))
   (loop for i from 1 to (knots-count spline) do
         (setf (knot-i-x spline i) (* factor (knot-i-x spline i))
@@ -94,12 +100,6 @@
   (compute-endpoints spline)
   (compute-coefficients spline)
   spline)
-
-(defmacro knot-i-x (spline i)
-  `(aref (aref (knots ,spline) ,i) 0))
-
-(defmacro knot-i-y (spline i)
-  `(aref (aref (knots ,spline) ,i) 1))
 
 (defmethod reset ((spline spline))
   (setf (cur-knot spline) 1

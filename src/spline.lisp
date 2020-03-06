@@ -1,6 +1,6 @@
 (in-package #:cl-user)
 (defpackage #:cl-catmull-rom-spline
-  (:nicknames #:cm-spline #:com.thejach.cl-catmull-rom-spline)
+  (:nicknames #:cr-spline #:com.thejach.cl-catmull-rom-spline)
   (:use #:common-lisp)
 
   ;; class
@@ -15,7 +15,7 @@
     #:scale
     ))
 
-(in-package #:cm-spline)
+(in-package #:cr-spline)
 
 (defclass spline ()
   ((knots :accessor knots :initform (make-array 1 :fill-pointer 0 :adjustable t))

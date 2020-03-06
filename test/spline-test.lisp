@@ -1,6 +1,6 @@
 (in-package #:cl-user)
 (defpackage #:cl-catmull-rom-spline/test
-  (:use #:common-lisp #:cm-spline #:fiveam #:cl-arrows))
+  (:use #:common-lisp #:cr-spline #:fiveam #:cl-arrows))
 (in-package #:cl-catmull-rom-spline/test)
 ;(setf *run-test-when-defined* 'T)
 
@@ -52,18 +52,18 @@
                   (add-knot '(3 6)))))
     (scale spline 2)
     (is (equalp #(#(2 4) #(2 4) #(4 8) #(6 12) #(6 12))
-                (cm-spline::knots spline)))
+                (cr-spline::knots spline)))
     (scale spline 0.5)
     (is (equalp #(#(1 2) #(1 2) #(2 4) #(3 6) #(3 6))
-                (cm-spline::knots spline)))))
+                (cr-spline::knots spline)))))
 
 (def-test sufficient-knots ()
   (let ((spline (make-instance 'spline)))
-    (signals error (cm-spline::compute-endpoints spline))
+    (signals error (cr-spline::compute-endpoints spline))
     (add-knot spline '(1 1))
-    (signals error (cm-spline::compute-endpoints spline))
+    (signals error (cr-spline::compute-endpoints spline))
     (add-knot spline '(1 2))
-    (signals error (cm-spline::compute-endpoints spline))
+    (signals error (cr-spline::compute-endpoints spline))
     (add-knot spline '(1 3))
-    (finishes (cm-spline::compute-endpoints spline))))
+    (finishes (cr-spline::compute-endpoints spline))))
 

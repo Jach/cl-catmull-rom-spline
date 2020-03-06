@@ -5,7 +5,7 @@ this paper: http://algorithmist.net/docs/catmullrom.pdf
 
 Splines provide a way to designate an ordered list of control points (knots) in
 a 2D plane and find a "smooth" path that travels through or around the points.
-CM splines have particularly nice properties for game applications:
+CR splines have particularly nice properties for game applications:
 
 * The path actually goes through each knot
 * If you relocate a knot then only the path near the knot changes

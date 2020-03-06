@@ -1,7 +1,7 @@
 (in-package #:cl-user)
 (defpackage #:cl-catmull-rom-spline/example
   (:nicknames #:spline-example)
-  (:use #:common-lisp #:cm-spline)
+  (:use #:common-lisp #:cr-spline)
   (:export #:launch #:main))
 (in-package #:cl-catmull-rom-spline/example)
 
@@ -185,7 +185,7 @@
       (reset *spline*)
       ; writing this part I noticed sdl-gfx has a spline system too, like directX does.
       ; it's neat to see the curves matching, apart from gfx sometimes not finishing the last segment for some reason
-      ;(sdl-gfx:draw-curve (coerce (cm-spline::knots *spline*) 'list) :color sdl:*green*)
+      ;(sdl-gfx:draw-curve (coerce (cr-spline::knots *spline*) 'list) :color sdl:*green*)
       (sdl-gfx:draw-shape vertices :color sdl:*blue*)
       ))
 

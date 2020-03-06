@@ -27,7 +27,8 @@ to show off adding knots and animating an object following the path. Simply
 load the system and execute `(spline-example:launch)`.
 Note that testing on an Ubuntu 16 system, even after apt-getting libsdl1.2-dev,
 this system was raising an error on load trying to find libSDL\_gfx.
-Continuing the load and launching still seemed to work anyway, though.
+Continuing the load and launching still seemed to work anyway, though. But
+it's also resolveable by apt-getting libsdl-gfx1.2-dev.
 
 # License
 

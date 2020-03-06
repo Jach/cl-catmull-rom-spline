@@ -165,7 +165,7 @@
           (aref knots 1))
 
     (let ((right-endpoint (aref knots count)))
-      (if (>= (1+ count) (array-dimension knots 0))
+      (if (>= (1+ count) (length knots))
           (vector-push-extend right-endpoint
                               knots)
           (setf (aref knots (1+ count))

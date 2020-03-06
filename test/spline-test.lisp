@@ -54,7 +54,7 @@
     (is (equalp #(#(2 4) #(2 4) #(4 8) #(6 12) #(6 12))
                 (cr-spline::knots spline)))
     (scale spline 0.5)
-    (is (equalp #(#(1 2) #(1 2) #(2 4) #(3 6) #(3 6))
+    (is (equalp #(#(1.0 2.0) #(1.0 2.0) #(2.0 4.0) #(3.0 6.0) #(3.0 6.0))
                 (cr-spline::knots spline)))))
 
 (def-test sufficient-knots ()

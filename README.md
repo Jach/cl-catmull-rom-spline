@@ -14,6 +14,8 @@ CM splines have particularly nice properties for game applications:
   cubic splines
 * Cheap to calculate
 
+![example.gif](example/example.gif)
+
 # System Outline
 
 `:cl-catmull-rom-spline` is the main library code. The typical usage is to

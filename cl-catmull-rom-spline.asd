@@ -11,7 +11,7 @@
 (asdf:defsystem #:cl-catmull-rom-spline/test
   :depends-on (#:cl-catmull-rom-spline
                #:fiveam
-               #:cl-arrows
+               #:arrow-macros
                #:uiop)
   :serial t
   :pathname "test"

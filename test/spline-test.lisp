@@ -1,6 +1,6 @@
 (in-package #:cl-user)
 (defpackage #:cl-catmull-rom-spline/test
-  (:use #:common-lisp #:cr-spline #:fiveam #:cl-arrows))
+  (:use #:common-lisp #:cr-spline #:fiveam #:arrow-macros))
 (in-package #:cl-catmull-rom-spline/test)
 ;(setf *run-test-when-defined* 'T)
 

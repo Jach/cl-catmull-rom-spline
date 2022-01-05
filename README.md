@@ -1,4 +1,5 @@
 # CL-Catmull-Rom-Spline
+[![Build Status](https://jenkins.thejach.com/buildStatus/icon?job=cl-catmull-rom-spline&style=plastic)](https://jenkins.thejach.com/job/cl-catmull-rom-spline/)
 
 This is a Common Lisp library implementing Catmull-Rom splines as described by
 this paper: http://algorithmist.net/docs/catmullrom.pdf

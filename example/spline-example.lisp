@@ -1,7 +1,6 @@
 (in-package #:cl-user)
 (defpackage #:cl-catmull-rom-spline/example
-  (:nicknames #:spline-example)
-  (:use #:common-lisp #:cr-spline)
+  (:use #:common-lisp #:cl-catmull-rom-spline)
   (:export #:launch #:main))
 (in-package #:cl-catmull-rom-spline/example)
 
@@ -26,11 +25,10 @@
 (defvar *drawing-path?* nil
   "Flag for if we're drawing the spline path")
 
-(defparameter *grey* (sdl:color :r 127 :g 127 :b 127))
+(defvar *grey* nil)
 
-(defparameter *font* (make-instance 'sdl:ttf-font-definition
-                                    :size 16
-                                    :filename (merge-pathnames "Vera.ttf" sdl:*default-font-path*)))
+(defvar *font* nil)
+
 (defun launch ()
   "Wrapped main launcher for better REPL experience."
   (bt:make-thread
@@ -40,12 +38,19 @@
 
 (defun main (argv &key (quit? t))
   (declare (ignorable argv))
+  (when (find "libSDL2" (cffi:list-foreign-libraries)
+              :key (lambda (lib) (princ-to-string (cffi:foreign-library-pathname lib)))
+              :test #'search)
+    (error "You can't have SDL2 loaded in this image before running this example, as sdl-ttf will bind to its symbols instead of SDL1's. Run from a fresh sbcl that doesn't have SDL2 in it."))
   (handler-bind
     ((serious-condition (lambda (c)
                           (uiop:print-condition-backtrace c :count 15)
                           (when quit? (uiop:quit 1)))))
-
     (sdl:with-init ()
+      (setf *grey* (sdl:color :r 127 :g 127 :b 127))
+      (setf *font* (make-instance 'sdl:ttf-font-definition
+                                  :size 16
+                                  :filename (merge-pathnames "Vera.ttf" sdl:*default-font-path*)))
       (sdl:window 800 600 :title-caption "Spline Examples" :double-buffer t :hw t)
       (setf (sdl:frame-rate) 60)
       (unless (sdl:initialise-default-font *font*) ;sdl:*ttf-font-vera*)
@@ -75,8 +80,8 @@
     (when (sufficient-knots?)
       (init-spline))))
 
-(defun init-spline (&optional (dt *dt*))
-  (setf *spline* (make-instance 'spline :dt dt))
+(defun init-spline (&optional (dt *dt*) (auto-close? nil))
+  (setf *spline* (make-instance 'spline :dt dt :auto-close? auto-close?))
   (loop for knot in *knots* do
         (add-knot *spline* knot)))
 
@@ -104,9 +109,9 @@
     ((sdl:key= key :sdl-key-3) ; infinity/bowtie
      (setf *knots* (list #(200 350) #(340 445) #(515 520) #(515 350) #(340 445) #(200 520) #(200 350)))
      (init-spline))
-    ((sdl:key= key :sdl-key-4) ; box
-     (setf *knots* (list #(180 40) #(120 40) #(120 90) #(180 90) #(180 40)))
-     (init-spline))
+    ((sdl:key= key :sdl-key-4) ; box -- now with :auto-close instead of manually repeating the final #(180 40) knot, so there's no kink at the end.
+     (setf *knots* (list #(180 40) #(120 40) #(120 90) #(180 90)))
+     (init-spline *dt* t))
     ((sdl:key= key :sdl-key-5) ; zag
      (setf *knots* (list #(160 20) #(150 40) #(160 60) #(150 80) #(160 100) #(150 100) #(160 80) #(150 60) #(160 30)))
      (init-spline 0.05))

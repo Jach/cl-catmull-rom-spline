@@ -4,3 +4,5 @@
 prep-quicklisp.lisp
 coverage-report/
 coverage-report.lisp
+cover.lisp
+coverage/
